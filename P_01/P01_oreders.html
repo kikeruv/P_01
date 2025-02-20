@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Games</title>
+    <title>Datails of Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    
 </head>
 <body>
     <div class="p-5">
@@ -64,68 +63,87 @@
           </div>
         </div>
       </div>
-<!-- Esta parte es el contenedor de las cartas-->
-<div class="container mt-5">
-  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
 
-<!-- Carta 1 -->
-    <div class="col">
-      <div class="card">
-        <img src="imagenes de cartas/PC.jpg"card-img-top product-img" alt="Producto 1">
-        <div class="card-body text-center">
-          <h5 class="card-title">PC</h5>
-          <p class="card-text"></p>$10,000</p>
-          <button class="btn btn-primary add-to-cart" data-name="PC" data-price="10000">
-            <i class="bi bi-cart-plus">Add to Cart</i>
-          </button>
-        </div>
-      </div>
-    </div>
+<!--Detalles de la compra-->
+      <div class="container mt-5">
+        <h2 class="mb-4">Order Details</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PC</td>
+                    <td>1</td>
+                    <td>$10,000</td>
+                    <td>$10,000</td>
+                </tr>
+                <tr>
+                    <td>Components</td>
+                    <td>1</td>
+                    <td>$20,000</td>
+                    <td>$20,000</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Shipping</strong></td>
+                    <td>$30,000</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total</strong></td>
+                    <td><strong>$30,000</strong></td>
+                </tr>
+            </tfoot>
+        </table>
 
-<!-- Carta 2 -->
-    <div class="col">
-      <div class="card">
-        <img src="imagenes de cartas/Componentes.jpg" class="card-img-top product-img" alt="Producto 2">
-        <div class="card-body text-center">
-          <h5 class="card-title">Components</h5>
-          <p class="card-text">Essential components for building a PC</p>
-          <p class="card-text">$20,000</p>
-          <button class="btn btn-primary add-to-cart" data-name="Components" data-price="20000">
-           <i class="bi bi-cart-plus">Add to Cart</i>
-          </button>
+        <div class="accordion" id="orderDetailsAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#orderItem1">
+                        PC Details
+                    </button>
+                </h2>
+                <div id="orderItem1" class="accordion-collapse collapse show" data-bs-parent="#orderDetailsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Brand:</strong> ASUS</p>
+                        <p><strong>Specifications:</strong> Intel i7, 16GB RAM, 512GB SSD</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#orderItem2">
+                        Components Details
+                    </button>
+                </h2>
+                <div id="orderItem2" class="accordion-collapse collapse" data-bs-parent="#orderDetailsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Items:</strong> Graphics Card (RTX 3060), Power Supply (750W)</p>
+                        <p><strong>Warranty:</strong> 2 Years</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-<!-- Carta 3 -->
-    <div class="col">
-      <div class="card">
-         <img src="imagenes de cartas/PS5.jpg" class="card-img-top product-img" alt="Producto 3">
-        <div class="card-body text-center">
-          <h5 class="card-title">Play Station 5</h5>
-          <p class="card-text">$10,000</p>
-          <button class="btn btn-primary add-to-cart" data-name="PS5" data-price="10000">
-            <i class="bi bi-cart-plus">Add to Cart</i>
-          </button>
+        <!-- Collapse for shipping details -->
+        <div class="mt-4">
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#shippingDetails">
+                View Shipping Details
+            </button>
+            <div class="collapse mt-3" id="shippingDetails">
+                <div class="card card-body">
+                    <p><strong>Shipping Address:</strong> 123 Main Street, New York</p>
+                    <p><strong>Estimated Delivery:</strong> 3-5 Business Days</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-<!-- Carta 4 -->
-    <div class="col">
-      <div class="card">
-        <img src="imagenes de cartas/teclado.jpg" class="card-img-top product-img" alt="Producto 4">
-        <div class="card-body text-center">
-          <h5 class="card-title">keyboard</h5>
-          <p class="card-text">$200</p>
-          <button class="btn btn-primary add-to-cart" data-name="Keyboard" data-price="200">
-            <i class="bi bi-cart-plus">Add to Cart</i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
     
 </body>
 </html>
