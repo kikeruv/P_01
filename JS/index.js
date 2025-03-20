@@ -1,0 +1,7 @@
+class Product{
+
+}
+
+class ProductExcepption{
+    
+}
