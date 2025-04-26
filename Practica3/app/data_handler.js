@@ -1,55 +1,60 @@
-
-const { Product } = require('../product');
-const express = require('express');
 const fs = require('fs');
 
 let productList = [];
 
 function getProducts(){
-    return productList;
+    return readProductsFile();
 }
 
 function getProductById(uuid){
-    return productList.find(product => product.uuid === uuid || null);
+    const products = readProductsFile();
+    return products.find(product => product.uuid === uuid) || null;
 }
 
 function createProduct(product){
-    if(!product){
+    if (!product) {
         throw new Error("Product can't be null");
     }
 
-    if(getProductById(product.uuid)){
-        throw new Error (`Product with ID ${product.uuid} already exist`);
+    const products = readProductsFile();
+    
+    if (products.find(p => p.uuid === product.uuid)) {
+        throw new Error(`Product with ID ${product.uuid} already exists`);
     }
 
-    productList.push(product);
+    products.push(product);
+    writeProductsFile(products);
 
     return product;
 }
 
 function updateProduct(uuid, updateProduct){
-    const index = productList.findIndex(product => product.uuid === uuid);
-
-    if(index === -1){
+    const products = readProductsFile();
+    const index = products.findIndex(product => product.uuid === uuid);
+    
+    if (index === -1) {
         throw new Error(`Product with ID ${uuid} not found`);
     }
 
     updateProduct.uuid = uuid;
+    products[index] = updateProduct;
+    writeProductsFile(products);
 
-    productList[index] = updateProduct;
-
-    return productList[index];
+    return products[index];
 }
 
 function deleteProduct(uuid){
-    const index = productList.findIndex(product => product.uuid === uuid);
-
-    if (index === -1){
+    const products = readProductsFile();
+    const index = products.findIndex(product => product.uuid === uuid);
+    
+    if (index === -1) {
         throw new Error(`Product with ID ${uuid} not found`);
     }
 
-    const removedProduct = productList[index];
-    productList.splice(index, 1);
+    const removedProduct = products[index];
+    products.splice(index, 1);
+    writeProductsFile(products);
+    
     return removedProduct;
 }
 
@@ -70,7 +75,8 @@ function findProduct(query){
         title = query.trim();
     }
 
-    return productList.filter(product => {
+    const products = readProductsFile();
+    return products.filter(product => {
         const matchCategory = product.category.toLowerCase().includes(category.toLowerCase());
         const matchTitle = product.title.toLowerCase().includes(title.toLowerCase());
         return matchCategory && matchTitle;
@@ -91,4 +97,24 @@ function productListToHTML(lista, htmlElement) {
     htmlElement.innerHTML = html;
 }
 
-module.exports = {getProducts, getProductById, createProduct, updateProduct, deleteProduct, findProduct, productListToHTML};
+function readProductsFile() {
+    try {
+        const data = fs.readFileSync('./data/productos.json', 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error al leer el archivo de productos:', error);
+        return [];
+    }
+}
+
+function writeProductsFile(products) {
+    try {
+        fs.writeFileSync('./data/productos.json', JSON.stringify(products, null, 2), 'utf8');
+        return true;
+    } catch (error) {
+        console.error('Error al escribir en el archivo de productos:', error);
+        return false;
+    }
+}
+
+module.exports = {getProducts, getProductById, createProduct, updateProduct, deleteProduct, findProduct, productListToHTML, readProductsFile, writeProductsFile};

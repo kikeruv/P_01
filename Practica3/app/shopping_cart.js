@@ -1,4 +1,4 @@
-const { getProductById } = require("./data_handler");
+const { getProductById } = require("./product");
 class ShoppingCart{
 
     constructor() {
@@ -122,8 +122,6 @@ class ProductProxy{
     }
 
 }
-
-
 class ShoppingCartException extends Error{
     constructor(message) {
         super(message);
@@ -131,4 +129,61 @@ class ShoppingCartException extends Error{
     }
 }
 
-module.exports = { ShoppingCart, ProductProxy, ShoppingCartException };
+function getCartProducts(cartItems) {
+    try {
+        // Validar que cartItems sea un array
+        if (!Array.isArray(cartItems)) {
+            return {
+                success: false,
+                message: "Cart items must be an array",
+                statusCode: 400
+            };
+        }
+
+        // Crear carrito temporal
+        const tempCart = new ShoppingCart();
+        
+        // Verificar si todos los productos existen
+        for (const item of cartItems) {
+            const product = getProductById(item.productUuid);
+            if (!product) {
+                return {
+                    success: false,
+                    message: `Product with UUID ${item.productUuid} not found`,
+                    statusCode: 404
+                };
+            }
+        }
+        
+        // Obtener los productos
+        const products = cartItems.map(item => {
+            const product = getProductById(item.productUuid);
+            return {
+                ...product,
+                amount: item.amount || 1
+            };
+        });
+
+        return {
+            success: true,
+            products: products,
+            statusCode: 200
+        };
+    } catch (error) {
+        if (error instanceof ShoppingCartException) {
+            return {
+                success: false,
+                message: error.message,
+                statusCode: 400
+            };
+        }
+        
+        return {
+            success: false,
+            message: "Internal server error",
+            statusCode: 500
+        };
+    }
+}
+
+module.exports = { ShoppingCart, ProductProxy, ShoppingCartException, getCartProducts };
