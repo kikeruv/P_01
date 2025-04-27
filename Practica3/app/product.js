@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const productController = require('../app/controllers');
-const shoppingCartController = require('../app/controllers/shopping_cart');
+const shoppingCartController = require('./shopping_cart');
 
 class Product{
     
