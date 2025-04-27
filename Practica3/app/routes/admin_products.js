@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importar controlador de productos
-const productController = require('../app/controllers/product');
+const productController = require('../controllers');
 
 // Middleware para validar administrador
 const validateAdmin = (req, res, next) => {

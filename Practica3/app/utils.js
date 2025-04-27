@@ -41,4 +41,4 @@ function validateProductData(productData) {
     };
 }
 
-module.exports = generateUuID;
+module.exports = {generateUuID, validateProductData};

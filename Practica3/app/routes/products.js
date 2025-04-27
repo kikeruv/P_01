@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // Corrige la importación 
-const productController = require('../app/controllers/product');
-const shoppingCartController = require('../app/controllers/shopping_cart');
+const productController = require('../controllers');
+const shoppingCartController = require('../shopping_cart');
 
 // GET /products - Obtener todos los productos (con filtro opcional)
 router.get('/', (req, res) => {

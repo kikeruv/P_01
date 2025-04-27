@@ -7,8 +7,8 @@ const port = 3000;
 app.use(express.json());
 
 // Corrige la ruta - asegúrate de que sea 'routes' no 'router'
-const productRoutes = require('./routes/products');
-const adminProductRoutes = require('./routes/admin_products');
+const productRoutes = require('./app/routes/products');
+const adminProductRoutes = require('./app/routes/admin_products');
 
 // Esta ruta puede permanecer para verificar que el servidor esté activo
 app.get('/', (req, res) => {

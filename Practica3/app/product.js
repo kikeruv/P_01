@@ -2,7 +2,7 @@ const { generateUuID }= require('./utils');
 const express = require('express');
 const router = express.Router();
 
-const productController = require('../app/controllers/product');
+const productController = require('../app/controllers');
 const shoppingCartController = require('../app/controllers/shopping_cart');
 
 class Product{
