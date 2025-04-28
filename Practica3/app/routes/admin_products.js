@@ -2,10 +2,6 @@
 const express = require('express');
 const router = express.Router();
 
-
-const productController = require('../controllers');
-
-
 function validateAdmin (req, res, next) {
     const authHeader = req.headers['x-auth'];
     
@@ -21,6 +17,16 @@ function validateAdmin (req, res, next) {
 
 router.use(validateAdmin);
 
+const productController = require('../controllers');
+
+router.get('/', (req, res) => {
+    try{
+        const products = productController.getProducts();
+        res.status(200).json(products);
+    }catch{
+        res.status(400).json({messege: error.messege})
+    }
+});
 
 router.post('/',validateAdmin, (req, res) => {
     try {
