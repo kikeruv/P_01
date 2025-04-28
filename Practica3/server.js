@@ -7,8 +7,8 @@ const port = 3000;
 app.use(express.json());
 
 
-const productRoutes = require('./app/routes/products');
-const adminProductRoutes = require('./app/routes/admin_products');
+const productRoutes = require('./app/routers/products');
+const adminProductRoutes = require('./app/routers/admin_products');
 
 
 app.get('/', (req, res) => {

@@ -6,7 +6,7 @@ const router = express.Router();
 const productController = require('../controllers');
 
 
-const validateAdmin = (req, res, next) => {
+function validateAdmin (req, res, next) {
     const authHeader = req.headers['x-auth'];
     
     if (!authHeader || authHeader !== 'admin') {
@@ -22,7 +22,7 @@ const validateAdmin = (req, res, next) => {
 router.use(validateAdmin);
 
 
-router.post('/', (req, res) => {
+router.post('/',validateAdmin, (req, res) => {
     try {
         const productData = req.body;
         const result = productController.createProduct(productData);
