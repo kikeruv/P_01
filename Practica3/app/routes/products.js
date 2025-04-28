@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Corrige la importación 
+
 const productController = require('../controllers');
 const shoppingCartController = require('../shopping_cart');
 
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
     }
 });
 
-// GET /products/:id - Obtener un producto específico
+
 router.get('/:id', (req, res) => {
     try {
         const productId = req.params.id;
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
     }
 });
 
-// POST /products/cart - Obtener productos para el carrito
+
 router.post('/cart', (req, res) => {
     try {
         const cartItems = req.body;

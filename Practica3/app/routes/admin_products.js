@@ -1,16 +1,16 @@
-// Importar express y crear router
+
 const express = require('express');
 const router = express.Router();
 
-// Importar controlador de productos
+
 const productController = require('../controllers');
 
-// Middleware para validar administrador
+
 const validateAdmin = (req, res, next) => {
     const authHeader = req.headers['x-auth'];
     
     if (!authHeader || authHeader !== 'admin') {
-        return res.status(403).json({ 
+        return res.status(400).json({ 
             message: "Acceso no autorizado, no se cuenta con privilegios de administrador" 
         });
     }
@@ -18,10 +18,10 @@ const validateAdmin = (req, res, next) => {
     next();
 };
 
-// Aplicar middleware de autenticación a todas las rutas de este router
+
 router.use(validateAdmin);
 
-// POST /admin/products/ - Crear nuevo producto
+
 router.post('/', (req, res) => {
     try {
         const productData = req.body;
@@ -38,9 +38,9 @@ router.post('/', (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-});
+}); 
 
-// PUT /admin/products/:id - Actualizar producto existente
+
 router.put('/:id', (req, res) => {
     try {
         const productId = req.params.id;
@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// DELETE /admin/products/:id - Eliminar producto
+
 router.delete('/:id', (req, res) => {
     try {
         const productId = req.params.id;
