@@ -6,14 +6,12 @@ const port = 3000;
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send('e-commerce app');
+});
 
 const productRoutes = require('./app/routers/products');
 const adminProductRoutes = require('./app/routers/admin_products');
-
-
-app.get('/', (req, res) => {
-    res.send('e-commerce app práctica 3');
-});
 
 // Rutas de la API
 app.use('/products', productRoutes);
@@ -28,7 +26,7 @@ app.get('/shopping_cart', (req, res) => {
     res.sendFile(path.join(__dirname,'P01_cart.html'));
 });
 
-// Servir archivos estáticos desde la carpeta P_01
+
 app.use(express.static(path.join(__dirname, '../P_01')));
 
 app.listen(port, () => {

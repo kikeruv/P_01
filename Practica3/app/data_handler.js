@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require ('path');
 
 let productList = [];
 
@@ -99,8 +100,17 @@ function productListToHTML(lista, htmlElement) {
 
 function readProductsFile() {
     try {
-        const data = fs.readFileSync('./data/productos.json', 'utf8');
+        const filePath = path.join(__dirname, 'data', 'productos.json');
+
+        if (!fs.existsSync(filePath)) {
+            console.warn(`El archivo no existe en: ${filePath}. Creando archivo vacío.`);
+            fs.writeFileSync(filePath, '[]', 'utf8');
+            return [];
+        }
+        
+        const data = fs.readFileSync(filePath, 'utf8');
         return JSON.parse(data);
+
     } catch (error) {
         console.error('Error al leer el archivo de productos:', error);
         return [];
@@ -109,7 +119,8 @@ function readProductsFile() {
 
 function writeProductsFile(products) {
     try {
-        fs.writeFileSync('./data/productos.json', JSON.stringify(products, null, 2), 'utf8');
+        const filePath = path.join(__dirname, 'data', 'productos.json');
+        fs.writeFileSync(filePath, JSON.stringify(products, null, 2), 'utf8');
         return true;
     } catch (error) {
         console.error('Error al escribir en el archivo de productos:', error);

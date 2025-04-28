@@ -53,6 +53,10 @@ router.post('/cart', (req, res) => {
         
         const result = shoppingCartController.getCartProducts(cartItems);
         
+        if (!result) {
+            return res.status(500).json({ message: "Error processing cart items" });
+        }
+        
         res.status(result.statusCode).json(
             result.success ? result.products : { message: result.message }
         );

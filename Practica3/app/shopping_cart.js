@@ -1,4 +1,5 @@
 const { getProductById } = require("./product");
+const productController = require('./controllers');
 class ShoppingCart{
 
     constructor() {
@@ -154,6 +155,16 @@ function getCartProducts(cartItems) {
                 };
             }
         }
+
+        const product = productController.getProductById(item.productUuid);
+        if (!product) {
+            return {
+                success: false,
+                message: `Product with UUID ${item.productUuid} not found`,
+                statusCode: 404
+            };
+        }
+    
         
         // Obtener los productos
         const products = cartItems.map(item => {
