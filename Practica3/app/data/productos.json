@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "uuid": "4308e9a6-36ec-4aa6-a4cc-9bfd1a16da8b",
+    "title": "Monitor Gaming 27'",
+    "description": "Monitor para juegos con alta tasa de refresco",
+    "imageUrl": "monitor.jpg",
+    "unit": "unidad",
+    "category": "Monitores",
+    "pricePerUnit": 5999,
+    "stock": 15
+  }
+]

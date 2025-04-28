@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
 const port = 3000;
 
@@ -10,8 +9,8 @@ app.get('/', (req, res) => {
     res.send('e-commerce app');
 });
 
-const productRoutes = require('./app/routers/products');
-const adminProductRoutes = require('./app/routers/admin_products');
+const productRoutes = require('./app/routes/products');
+const adminProductRoutes = require('./app/routes/admin_products');
 
 // Rutas de la API
 app.use('/products', productRoutes);
