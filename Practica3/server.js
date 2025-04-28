@@ -6,11 +6,11 @@ const port = 3000;
 
 app.use(express.json());
 
-// Corrige la ruta - asegúrate de que sea 'routes' no 'router'
+
 const productRoutes = require('./app/routes/products');
 const adminProductRoutes = require('./app/routes/admin_products');
 
-// Esta ruta puede permanecer para verificar que el servidor esté activo
+
 app.get('/', (req, res) => {
     res.send('e-commerce app práctica 3');
 });
@@ -21,11 +21,11 @@ app.use('/admin/products', adminProductRoutes);
 
 // Configurar rutas HTML para la práctica 1
 app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname, '../P_01', 'P01_index.html'));
+    res.sendFile(path.join(__dirname,'P01_index.html'));
 });
 
 app.get('/shopping_cart', (req, res) => {
-    res.sendFile(path.join(__dirname, '../P_01', 'P01_cart.html'));
+    res.sendFile(path.join(__dirname,'P01_cart.html'));
 });
 
 // Servir archivos estáticos desde la carpeta P_01
