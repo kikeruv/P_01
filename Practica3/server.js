@@ -5,10 +5,6 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('e-commerce app');
-});
-
 const productRoutes = require('./app/routes/products');
 const adminProductRoutes = require('./app/routes/admin_products');
 
@@ -16,17 +12,21 @@ const adminProductRoutes = require('./app/routes/admin_products');
 app.use('/products', productRoutes);
 app.use('/admin/products', adminProductRoutes);
 
+app.get('/', (req, res) => {
+    res.sendirect( 'P01_index.html');
+});
+
 // Configurar rutas HTML para la práctica 1
 app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname,'P01_index.html'));
+    res.sendirect( 'P01_index.html');
 });
 
 app.get('/shopping_cart', (req, res) => {
-    res.sendFile(path.join(__dirname,'P01_cart.html'));
+    res.sendirect( 'P01_index.html');
 });
 
-
-app.use(express.static(path.join(__dirname, '../P_01')));
+ 
+app.use(express.static(__dirname + '/../P_01'));
 
 app.listen(port, () => {
     console.log(`El servidor esta corriendo en el puerto ${port}`);
