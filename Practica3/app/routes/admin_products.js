@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post('/',validateAdmin, (req, res) => {
+router.post('/', (req, res) => {
     try {
         const productData = req.body;
         const result = productController.createProduct(productData);

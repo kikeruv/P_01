@@ -8,5 +8,45 @@
     "category": "Monitores",
     "pricePerUnit": 5999,
     "stock": 15
+  },
+  {
+    "uuid": "a7aa2c02-dd27-49ea-a6ec-098f5e0f81ab",
+    "title": "PC Gaming RGB",
+    "description": "Potente PC para gaming con iluminación RGB y refrigeración líquida",
+    "imageUrl": "pc_gaming.jpg",
+    "unit": "unidad",
+    "category": "PC",
+    "pricePerUnit": 10000,
+    "stock": 15
+  },
+  {
+    "uuid": "5cdeda68-2ba4-4ba9-b872-9d4da94db94b",
+    "title": "Kit de Componentes Gaming",
+    "description": "Essential components for building a PC, incluye tarjeta madre, RAM, procesador y tarjeta gráfica",
+    "imageUrl": "components.jpg",
+    "unit": "kit",
+    "category": "Components",
+    "pricePerUnit": 20000,
+    "stock": 10
+  },
+  {
+    "uuid": "73064c25-93f5-4373-a22a-5f1fb920634a",
+    "title": "Teclado Mecánico RGB",
+    "description": "Teclado gaming mecánico con retroiluminación RGB personalizable",
+    "imageUrl": "keyboard.jpg",
+    "unit": "unidad",
+    "category": "Periféricos",
+    "pricePerUnit": 200,
+    "stock": 50
+  },
+  {
+    "uuid": "2b47aeda-c63c-4cef-9384-5ab34b07b5a7",
+    "title": "Monitor Gaming 27' 144Hz",
+    "description": "Monitor para gaming con alta tasa de refresco y tiempo de respuesta de 1ms",
+    "imageUrl": "monitor.jpg",
+    "unit": "unidad",
+    "category": "Monitores",
+    "pricePerUnit": 5999,
+    "stock": 25
   }
 ]

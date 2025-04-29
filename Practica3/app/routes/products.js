@@ -45,23 +45,67 @@ router.get('/:id', (req, res) => {
 
 router.post('/cart', (req, res) => {
     try {
+        console.log("POST /cart - Request received");
         const cartItems = req.body;
         
+        // Verificar que sea un array
         if (!Array.isArray(cartItems)) {
-            return res.status(400).json({ message: "Request body must be an array" });
+            console.log("Request body is not an array");
+            return res.status(400).json({ 
+                message: "Request body must be an array" 
+            });
         }
         
-        const result = shoppingCartController.getCartProducts(cartItems);
+        console.log("Cart items:", JSON.stringify(cartItems));
         
-        if (!result) {
-            return res.status(500).json({ message: "Error processing cart items" });
+        // Obtener todos los productos disponibles
+        const dataHandler = require('../data_handler');
+        const allProducts = dataHandler.getProducts();
+        
+        // Array para almacenar los productos encontrados
+        const foundProducts = [];
+        
+        // Verificar cada producto en el carrito
+        for (const item of cartItems) {
+            // Validar la estructura del item
+            if (!item.productUuid) {
+                return res.status(400).json({ 
+                    message: "Each item must have a productUuid" 
+                });
+            }
+            
+            console.log(`Looking for product with UUID: ${item.productUuid}`);
+            
+            // Buscar el producto por UUID
+            const product = allProducts.find(p => p.uuid === item.productUuid);
+            
+            // Si no se encuentra el producto, devolver error
+            if (!product) {
+                console.log(`Product with UUID ${item.productUuid} not found`);
+                return res.status(404).json({ 
+                    message: `Product with UUID ${item.productUuid} not found` 
+                });
+            }
+            
+            console.log(`Product found: ${product.title}`);
+            
+            // Agregar el producto al array con su cantidad
+            const productWithAmount = JSON.parse(JSON.stringify(product)); // Deep copy
+            productWithAmount.amount = item.amount || 1;
+            foundProducts.push(productWithAmount);
         }
         
-        res.status(result.statusCode).json(
-            result.success ? result.products : { message: result.message }
-        );
+        console.log(`Returning ${foundProducts.length} products`);
+        
+        // Devolver los productos encontrados
+        res.status(200).json(foundProducts);
+        
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", error: error.message });
+        console.error("Error processing cart:", error);
+        res.status(500).json({ 
+            message: "Internal server error", 
+            error: error.message 
+        });
     }
 });
 

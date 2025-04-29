@@ -12,17 +12,19 @@ const adminProductRoutes = require('./app/routes/admin_products');
 app.use('/products', productRoutes);
 app.use('/admin/products', adminProductRoutes);
 
+app.use(express.static(path.join(__dirname, '..', 'P_01')));
+
+// Rutas para vistas HTML
 app.get('/', (req, res) => {
-    res.sendirect( 'P01_index.html');
+    res.sendFile(path.join(__dirname, '..', 'P_01', 'P01_index.html'));
 });
 
-// Configurar rutas HTML para la práctica 1
 app.get('/home', (req, res) => {
-    res.sendirect( 'P01_index.html');
+    res.sendFile(path.join(__dirname, '..', 'P_01', 'P01_index.html'));
 });
 
 app.get('/shopping_cart', (req, res) => {
-    res.sendirect( 'P01_index.html');
+    res.sendFile(path.join(__dirname, '..', 'P_01', 'P01_cart.html'));
 });
 
  
